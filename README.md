@@ -64,16 +64,19 @@ Append an object to `window.NORVIA_EXPERIMENTS` in `data/experiments.js`:
 {
   id: "my-tool",
   name: "my-tool",
-  stack: "TypeScript", // or Python, Rust, Rust + Python, Go, …
+  stack: "TypeScript", // or Python, Rust, Go, …
   family: "Tooling",
-  familySlug: "tooling", // foundations | runtimes | observability | tooling | research
+  familySlug: "tooling", // runtimes | observability | tooling
+  status: "queue", // "active" (max 2) | "queue"
   description: "One sentence that states the sharp idea.",
-  url: "https://github.com/norvialabs/my-tool",
-  code: "https://github.com/norvialabs/my-tool",
+  // Only add when the repo is live — omitted links render as "Coming soon" / disabled queue cards
+  // url: "https://github.com/norvialabs/my-tool",
+  // code: "https://github.com/norvialabs/my-tool",
 }
 ```
 
-Update the decision-table rows in `app.js` if you want it listed under “If you need this…”.
+Keep at most **two** experiments with `status: "active"`. Queue cards are non-interactive.
+Update decision-table rows in `app.js` if you want it listed under “If you need this…”.
 
 ## Deploy
 

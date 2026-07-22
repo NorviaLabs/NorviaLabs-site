@@ -6,7 +6,7 @@
     <title>Norvia Labs — Open-Source Experiments for Builders</title>
     <meta
       name="description"
-      content="Norvia Labs is an open-source experiment lab shipping focused tools for AI builders: runtimes, observability, research benchmarks, and developer tooling. MIT licensed."
+      content="Norvia Labs is an open-source experiment lab shipping focused tools for AI builders: agent harnesses, runtimes, observability, and developer tooling. MIT licensed."
     />
     <link rel="canonical" href="https://norvialabs.com/" />
     <meta property="og:type" content="website" />
@@ -92,9 +92,9 @@
             for the <span class="gradient-text">agentic era</span>
           </h1>
           <p class="hero-lead">
-            Norvia Labs ships a family of focused open-source experiments for AI builders —
-            runtimes, observability, research harnesses, and developer tooling. Small sharp
-            ideas. Public by default. MIT throughout.
+            Norvia Labs ships focused open-source experiments for AI builders — runtimes,
+            agent harnesses, sandboxes, observability, and developer tooling. Two active at a time;
+            the rest stay in a public queue. Small sharp ideas. MIT throughout.
           </p>
           <div class="hero-ctas">
             <a class="btn btn-primary btn-lg" href="#experiments">Explore experiments</a>
@@ -109,16 +109,16 @@
       <section class="stats-bar">
         <div class="container stats-grid">
           <div class="stat">
-            <div class="stat-value" data-stat="experiments">12</div>
+            <div class="stat-value" data-stat="experiments">6</div>
             <div class="stat-label">Open experiments</div>
           </div>
           <div class="stat">
-            <div class="stat-value" data-stat="families">5</div>
-            <div class="stat-label">Product families</div>
+            <div class="stat-value" data-stat="active">2</div>
+            <div class="stat-label">Active right now</div>
           </div>
           <div class="stat">
-            <div class="stat-value">0</div>
-            <div class="stat-label">Accounts required</div>
+            <div class="stat-value" data-stat="families">3</div>
+            <div class="stat-label">Product families</div>
           </div>
           <div class="stat">
             <div class="stat-value">MIT</div>
@@ -140,9 +140,10 @@
             </p>
             <p>
               Norvia Labs publishes that missing layer as focused, MIT-licensed experiments. Sometimes
-              it is a <strong>runtime primitive</strong> — a sandbox, a memory shard, a trace kit.
-              Sometimes it is a <strong>research harness</strong> or a small tool that makes the
-              next experiment cheaper to run. Each one does one thing well and lives in the open.
+              it is a <strong>runtime primitive</strong> — a sandbox with hard limits. Sometimes it is
+              a <strong>dev-loop tool</strong> — MCP mocks, pinned fixtures, CI for prompts — or a
+              metrics surface so cost and quality stay visible. Each one does one thing well and lives
+              in the open. We build <strong>two actively</strong>; the rest stay in a public queue.
             </p>
             <div class="about-links">
               <a class="btn btn-ghost" href="/about/">Read our thesis</a>
@@ -155,16 +156,14 @@
               <span style="margin-left: 0.5rem">experiment.py</span>
             </div>
             <pre><span class="cm"># Small imports. Sharp ideas. Ship in the open.</span>
-<span class="kw">from</span> tracekit <span class="kw">import</span> Tracer
+<span class="kw">from</span> forge <span class="kw">import</span> Harness
 <span class="kw">from</span> sandbox_lite <span class="kw">import</span> Sandbox
-<span class="kw">from</span> costmap <span class="kw">import</span> CostMap
 
-tracer = Tracer()
-<span class="kw">with</span> Sandbox(timeout=30) <span class="kw">as</span> box:
-    result = box.run(agent_step)
-    tracer.span(<span class="str">"agent_step"</span>, result)
+harness = Harness(policy=<span class="str">"tools-only"</span>)
+<span class="kw">with</span> Sandbox(timeout=30, mem_mb=256) <span class="kw">as</span> box:
+    result = harness.step(box.run, agent_turn)
 
-CostMap.from_run(tracer).print()  <span class="cm"># where did tokens go?</span></pre>
+<span class="cm"># queue next: wiremock-mcp, fixturelab, metrics…</span></pre>
           </div>
         </div>
       </section>
@@ -177,11 +176,12 @@ CostMap.from_run(tracer).print()  <span class="cm"># where did tokens go?</span>
             <h2 class="section-title">Open experiments, one thesis</h2>
             <p class="section-desc">
               Each experiment encodes one sharp idea, ships its own docs, and is free to fork.
-              Filter by what you are building.
+              Two are <strong>active</strong> at a time; the rest sit in the <strong>queue</strong>.
+              Filter by family.
             </p>
           </div>
           <div class="filter-row" data-filter-row></div>
-          <div class="product-grid" data-product-grid data-limit="9"></div>
+          <div class="product-grid" data-product-grid data-limit="6"></div>
           <p class="empty-state" data-empty-state>No experiments in this family yet.</p>
           <a class="see-all" href="/experiments/">See all experiments →</a>
         </div>
@@ -192,7 +192,7 @@ CostMap.from_run(tracer).print()  <span class="cm"># where did tokens go?</span>
         <div class="container">
           <div class="section-header">
             <p class="section-label">What we build</p>
-            <h2 class="section-title">Five families across the experiment stack</h2>
+            <h2 class="section-title">Three families across the experiment stack</h2>
             <p class="section-desc">Every experiment fits into one of them.</p>
           </div>
           <div class="family-grid" data-family-grid></div>
@@ -253,8 +253,8 @@ CostMap.from_run(tracer).print()  <span class="cm"># where did tokens go?</span>
               <div class="principle-num">3</div>
               <h3>Measure what matters</h3>
               <p>
-                Benchmarks, traces, and cost maps are first-class. If we cannot measure it, it is
-                not ready to recommend.
+                Benchmarks, metrics, and cost are first-class. If we cannot measure it, it is not
+                ready to recommend.
               </p>
             </div>
             <div class="principle">
@@ -299,8 +299,9 @@ CostMap.from_run(tracer).print()  <span class="cm"># where did tokens go?</span>
               <summary>What is Norvia Labs?</summary>
               <div class="faq-body">
                 Norvia Labs is an open-source experiment lab building focused tools for AI builders.
-                We ship MIT-licensed projects across foundations, runtimes, observability, tooling,
-                and research — each encoding one sharp idea.
+                We ship MIT-licensed projects across runtimes, observability, and tooling — each
+                encoding one sharp idea. Two experiments are active at a time; the rest wait in a
+                public queue.
               </div>
             </details>
             <details class="faq-item">
@@ -314,7 +315,8 @@ CostMap.from_run(tracer).print()  <span class="cm"># where did tokens go?</span>
               <summary>How do I choose an experiment?</summary>
               <div class="faq-body">
                 Start from the problem. Use the “Find a tool” decision table on this page, or filter
-                the portfolio by family (Foundations, Runtimes, Observability, Tooling, Research).
+                the portfolio by family (Runtimes, Observability, Tooling). Prefer an
+                <strong>Active</strong> project if you want something moving now.
               </div>
             </details>
             <details class="faq-item">

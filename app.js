@@ -43,25 +43,73 @@
       <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/>
     </svg>`;
 
+  function statusLabel(status) {
+    return status === "active" ? "Active" : "Queue";
+  }
+
+  function hasLiveLink(exp) {
+    return Boolean(exp.url);
+  }
+
+  function nameHTML(exp) {
+    if (exp.status === "queue" || !hasLiveLink(exp)) {
+      return `<span class="product-name product-name-plain">${exp.name}</span>`;
+    }
+    return `<a class="product-name" href="${exp.url}" target="_blank" rel="noopener">${exp.name}</a>`;
+  }
+
+  function linksHTML(exp) {
+    if (exp.status === "queue") {
+      return `<span class="product-links-muted">In queue</span>`;
+    }
+    const parts = [];
+    if (exp.url) {
+      parts.push(
+        `<a class="visit" href="${exp.url}" target="_blank" rel="noopener">Visit →</a>`
+      );
+    }
+    if (exp.code) {
+      parts.push(
+        `<a class="code" href="${exp.code}" target="_blank" rel="noopener">Code</a>`
+      );
+    }
+    if (!parts.length) {
+      return `<span class="product-links-muted">Coming soon</span>`;
+    }
+    return `<div class="product-links">${parts.join("")}</div>`;
+  }
+
   function cardHTML(exp) {
+    const status = exp.status === "active" ? "active" : "queue";
+    const disabled = status === "queue";
     return `
-      <article class="product-card" data-group="${exp.familySlug}">
+      <article class="product-card${disabled ? " is-disabled" : ""}" data-group="${exp.familySlug}" data-status="${status}"${disabled ? ' aria-disabled="true"' : ""}>
         <div class="product-card-top">
           <div class="product-name-row">
             <span class="product-icon">${arrowSvg}</span>
-            <a class="product-name" href="${exp.url}" target="_blank" rel="noopener">${exp.name}</a>
+            ${nameHTML(exp)}
           </div>
-          <span class="stack-badge" data-stack="${exp.stack}">${exp.stack}</span>
+          <div class="product-badges">
+            <span class="status-badge status-${status}">${statusLabel(status)}</span>
+            <span class="stack-badge" data-stack="${exp.stack}">${exp.stack}</span>
+          </div>
         </div>
         <p class="product-desc">${exp.description}</p>
         <div class="product-footer">
           <span class="product-family">${exp.family}</span>
-          <div class="product-links">
-            <a class="visit" href="${exp.url}" target="_blank" rel="noopener">Visit →</a>
-            <a class="code" href="${exp.code}" target="_blank" rel="noopener">Code</a>
-          </div>
+          ${linksHTML(exp)}
         </div>
       </article>`;
+  }
+
+  /** Active work first, then queue; stable by name within a status. */
+  function sortedExperiments(list) {
+    const rank = (s) => (s === "active" ? 0 : 1);
+    return [...list].sort((a, b) => {
+      const d = rank(a.status) - rank(b.status);
+      if (d !== 0) return d;
+      return a.name.localeCompare(b.name);
+    });
   }
 
   /* Home / experiments grid */
@@ -108,8 +156,11 @@
   }
 
   function filtered() {
-    if (activeFilter === "all") return experiments;
-    return experiments.filter((e) => e.familySlug === activeFilter);
+    const base =
+      activeFilter === "all"
+        ? experiments
+        : experiments.filter((e) => e.familySlug === activeFilter);
+    return sortedExperiments(base);
   }
 
   function renderCards(limit) {
@@ -144,7 +195,12 @@
         const members = experiments.filter((e) => e.familySlug === f.slug);
         const tags = members
           .slice(0, 6)
-          .map((e) => `<a href="${e.url}" target="_blank" rel="noopener">${e.name}</a>`)
+          .map((e) => {
+            if (e.status === "queue" || !e.url) {
+              return `<span class="family-tag-plain${e.status === "queue" ? " is-queue" : ""}">${e.name}</span>`;
+            }
+            return `<a href="${e.url}" target="_blank" rel="noopener">${e.name}</a>`;
+          })
           .join("");
         return `
           <div class="family-card">
@@ -161,28 +217,31 @@
   const tableBody = document.querySelector("[data-decision-body]");
   if (tableBody) {
     const rows = [
-      ["start a shared types & utils layer", "norvia-core"],
-      ["benchmark eval signals under load", "signalbench"],
-      ["trace agent runs with structured spans", "tracekit"],
-      ["version and review prompts in CI", "promptforge"],
+      ["run an agentic tool loop / harness", "forge"],
       ["sandbox untrusted tool code", "sandbox-lite"],
-      ["store experiment memory locally", "memshard"],
-      ["sketch agent graphs before coding", "agent-sketch"],
-      ["export AI workload metrics", "openmetrics-ai"],
-      ["pin fixtures for flaky LLM tests", "fixturelab"],
       ["mock MCP servers locally", "wiremock-mcp"],
-      ["inspect and replay pipeline failures", "flowglass"],
-      ["map token spend across a run", "costmap"],
+      ["pin fixtures for flaky LLM tests", "fixturelab"],
+      ["export AI metrics and map token spend", "openmetrics-ai"],
+      ["version and review prompts in CI", "promptforge"],
     ];
 
     tableBody.innerHTML = rows
       .map(([need, name]) => {
         const exp = experiments.find((e) => e.name === name);
         if (!exp) return "";
+        const queued = exp.status === "queue";
+        let reach;
+        if (queued) {
+          reach = `<span class="mono decision-muted">${exp.name}</span> <span class="decision-status">queue</span>`;
+        } else if (exp.url) {
+          reach = `<a class="mono" href="${exp.url}" target="_blank" rel="noopener">${exp.name}</a>`;
+        } else {
+          reach = `<span class="mono">${exp.name}</span>`;
+        }
         return `
-          <tr>
+          <tr${queued ? ' class="decision-row-queue"' : ""}>
             <td>${need}</td>
-            <td><a class="mono" href="${exp.url}" target="_blank" rel="noopener">${exp.name}</a></td>
+            <td>${reach}</td>
             <td>${exp.family}</td>
             <td>${exp.stack}</td>
           </tr>`;
@@ -195,6 +254,9 @@
     const key = el.getAttribute("data-stat");
     if (key === "experiments") el.textContent = String(experiments.length);
     if (key === "families") el.textContent = String(families.length);
+    if (key === "active") {
+      el.textContent = String(experiments.filter((e) => e.status === "active").length);
+    }
   });
 
   /* Contact form → Web3Forms */
