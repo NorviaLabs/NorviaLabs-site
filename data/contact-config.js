@@ -16,7 +16,7 @@ window.NORVIA_CONTACT = {
   /** Inbox that receives submissions (also used for mailto fallback) */
   to: "hello@norvialabs.com",
   /** Subject line prefix in the email you receive */
-  subjectPrefix: "NorviaLabs contact",
+  subjectPrefix: "Norvia Labs contact",
   /** Optional: from name shown in Web3Forms emails */
-  fromName: "NorviaLabs website",
+  fromName: "Norvia Labs website",
 };

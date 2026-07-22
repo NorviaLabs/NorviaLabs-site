@@ -1,6 +1,6 @@
-# NorviaLabs.com
+# Norvia Labs
 
-Static website for **NorviaLabs** — an open-source experiment lab site inspired by the visual language of [neullabs.com](https://www.neullabs.com/): dark navy base, blue/violet brand accents, Inter + JetBrains Mono, product cards, family filters, and a decision table.
+Static website for **Norvia Labs** (`norvialabs.com`) — an open-source experiment lab site inspired by the visual language of [neullabs.com](https://www.neullabs.com/): dark navy base, blue/violet brand accents, Inter + JetBrains Mono, product cards, family filters, and a decision table.
 
 ## Stack
 
@@ -86,4 +86,4 @@ Set the custom domain to `norvialabs.com` in your host’s DNS settings.
 
 ## License
 
-Site markup and styles: use freely for NorviaLabs. Experiment software licenses live in their own repositories (MIT intended).
+Site markup and styles: use freely for Norvia Labs. Experiment software licenses live in their own repositories (MIT intended).

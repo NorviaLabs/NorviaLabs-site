@@ -1,4 +1,4 @@
-/** NorviaLabs experiments portfolio — edit this file to add/remove projects. */
+/** Norvia Labs experiments portfolio — edit this file to add/remove projects. */
 window.NORVIA_EXPERIMENTS = [
   {
     id: "norvia-core",

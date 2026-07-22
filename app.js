@@ -205,7 +205,7 @@
     const submitBtn = contactForm.querySelector('[type="submit"]');
     const cfg = window.NORVIA_CONTACT || {};
     const accessKey = (cfg.accessKey || "").trim();
-    const subjectPrefix = cfg.subjectPrefix || "NorviaLabs contact";
+    const subjectPrefix = cfg.subjectPrefix || "Norvia Labs contact";
     const githubUrl = "https://github.com/norvialabs";
 
     function show(el, text) {
@@ -283,7 +283,7 @@
           body: JSON.stringify({
             access_key: accessKey,
             subject: `${subjectPrefix}: ${nameTrim}`,
-            from_name: cfg.fromName || "NorviaLabs website",
+            from_name: cfg.fromName || "Norvia Labs website",
             name: nameTrim,
             email: emailTrim,
             company: companyTrim || undefined,
