@@ -233,16 +233,16 @@
       e.preventDefault();
       hideStatus();
 
-      const name = (contactForm.elements.namedItem("name") || {}).value || "";
-      const email = (contactForm.elements.namedItem("email") || {}).value || "";
-      const company = (contactForm.elements.namedItem("company") || {}).value || "";
-      const message = (contactForm.elements.namedItem("message") || {}).value || "";
-      const botcheck = (contactForm.elements.namedItem("botcheck") || {}).value || "";
+      const nameEl = contactForm.elements.namedItem("name");
+      const emailEl = contactForm.elements.namedItem("email");
+      const companyEl = contactForm.elements.namedItem("company");
+      const messageEl = contactForm.elements.namedItem("message");
+      const botEl = contactForm.elements.namedItem("botcheck");
 
-      const nameTrim = String(name).trim();
-      const emailTrim = String(email).trim();
-      const companyTrim = String(company).trim();
-      const messageTrim = String(message).trim();
+      const nameTrim = String((nameEl && nameEl.value) || "").trim();
+      const emailTrim = String((emailEl && emailEl.value) || "").trim();
+      const companyTrim = String((companyEl && companyEl.value) || "").trim();
+      const messageTrim = String((messageEl && messageEl.value) || "").trim();
       const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailTrim);
 
       if (!nameTrim || !emailOk || !messageTrim) {
@@ -253,8 +253,9 @@
         return;
       }
 
-      // Honeypot filled → pretend success (bots)
-      if (String(botcheck).trim()) {
+      // Honeypot: only treat as bot when the hidden checkbox is actually checked.
+      // (Checkbox .value is always "on" even when unchecked — do not use .value here.)
+      if (botEl && botEl.checked) {
         show(
           success,
           "Thank you! Your message has been sent. We will get back to you soon."
