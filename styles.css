@@ -1162,19 +1162,28 @@ html.light table.decision .mono {
 }
 
 /* ——— FAQ ——— */
-/* Keep header + accordion on the same horizontal track */
+/* Center header + accordion as one block in the container */
+#faq .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 #faq .section-header {
+  width: 100%;
   max-width: 48rem;
+  margin-inline: auto;
+  text-align: left;
 }
 
 .faq-list {
   width: 100%;
   max-width: 48rem;
+  margin-inline: auto;
   display: flex;
   flex-direction: column;
   align-items: stretch;
   gap: 0.5rem;
-  margin: 0;
   padding: 0;
 }
 
