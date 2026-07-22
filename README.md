@@ -64,7 +64,7 @@ Append an object to `window.NORVIA_EXPERIMENTS` in `data/experiments.js`:
 {
   id: "my-tool",
   name: "my-tool",
-  stack: "TypeScript", // or Python, Rust, Go, …
+  stack: "Rust",
   status: "queue", // "active" | "queue"
   description: "One sentence that states the sharp idea.",
   // Only add when the repo is live — omitted links render as "Coming soon" / disabled queue cards

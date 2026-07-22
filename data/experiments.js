@@ -6,7 +6,7 @@ window.NORVIA_EXPERIMENTS = [
   {
     id: "forge",
     name: "forge",
-    stack: "TypeScript",
+    stack: "Rust",
     status: "active",
     description:
       "Agentic harness for running tools, loops, and policies. Thin core, pluggable models, deterministic replays.",
@@ -14,7 +14,7 @@ window.NORVIA_EXPERIMENTS = [
   {
     id: "guard",
     name: "guard",
-    stack: "TypeScript",
+    stack: "Rust",
     status: "queue",
     description:
       "Control-plane proxy for agent traffic: MCP governance, ephemeral agent identity (ZTNA), and real-time execution safety that stops loops and bad commands.",
@@ -22,7 +22,7 @@ window.NORVIA_EXPERIMENTS = [
   {
     id: "contract",
     name: "contract",
-    stack: "TypeScript",
+    stack: "Rust",
     status: "queue",
     description:
       "API translation that turns existing enterprise backends into clean tool schemas agents can call without hand-written wrappers.",
@@ -30,7 +30,7 @@ window.NORVIA_EXPERIMENTS = [
   {
     id: "route",
     name: "route",
-    stack: "TypeScript",
+    stack: "Rust",
     status: "queue",
     description:
       "Context optimizer that prunes unused tool schemas from the prompt to cut token cost and latency.",
@@ -38,7 +38,7 @@ window.NORVIA_EXPERIMENTS = [
   {
     id: "audit",
     name: "audit",
-    stack: "TypeScript",
+    stack: "Rust",
     status: "queue",
     description:
       "Structured, cryptographic audit ledger for every action the gateway processes — built for enterprise compliance.",

@@ -150,15 +150,15 @@
           <div class="code-panel" aria-label="Example code">
             <div class="code-panel-bar">
               <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-              <span style="margin-left: 0.5rem">experiment.py</span>
+              <span style="margin-left: 0.5rem">main.rs</span>
             </div>
-            <pre><span class="cm"># Small imports. Sharp ideas. Ship in the open.</span>
-<span class="kw">from</span> forge <span class="kw">import</span> Harness
+            <pre><span class="cm">// Small crates. Sharp ideas. Ship in the open.</span>
+<span class="kw">use</span> forge::Harness;
 
-harness = Harness(policy=<span class="str">"tools-only"</span>)
-result = harness.step(agent_turn)
+<span class="kw">let</span> harness = Harness::new(<span class="str">"tools-only"</span>);
+<span class="kw">let</span> result = harness.step(agent_turn)?;
 
-<span class="cm"># stack: forge · guard · contract · route · audit</span></pre>
+<span class="cm">// stack: forge · guard · contract · route · audit</span></pre>
           </div>
         </div>
       </section>
