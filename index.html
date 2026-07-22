@@ -6,7 +6,7 @@
     <title>Norvia Labs — Open-Source Experiments for Builders</title>
     <meta
       name="description"
-      content="Norvia Labs is an open-source experiment lab shipping focused tools for AI builders: agent harnesses, runtimes, observability, and developer tooling. MIT licensed."
+      content="Norvia Labs is an open-source experiment lab: forge (agent harness), guard (control plane), plus contract, route, and audit. MIT licensed."
     />
     <link rel="canonical" href="https://norvialabs.com/" />
     <meta property="og:type" content="website" />
@@ -50,7 +50,6 @@
         </a>
         <nav class="nav-desktop" aria-label="Primary">
           <a class="nav-link" href="/experiments/">Experiments</a>
-          <a class="nav-link" href="/#families">Families</a>
           <a class="nav-link" href="/about/">About</a>
           <a class="nav-link" href="/contact/">Contact</a>
           <a class="nav-link" href="https://github.com/norvialabs" target="_blank" rel="noopener">GitHub</a>
@@ -72,7 +71,6 @@
       <nav class="mobile-nav" data-mobile-nav aria-label="Mobile">
         <div class="container mobile-nav-inner">
           <a href="/experiments/">Experiments</a>
-          <a href="/#families">Families</a>
           <a href="/about/">About</a>
           <a href="/contact/">Contact</a>
           <a href="https://github.com/norvialabs" target="_blank" rel="noopener">GitHub</a>
@@ -92,9 +90,9 @@
             for the <span class="gradient-text">agentic era</span>
           </h1>
           <p class="hero-lead">
-            Norvia Labs ships focused open-source experiments for AI builders — runtimes,
-            agent harnesses, sandboxes, observability, and developer tooling. Two active at a time;
-            the rest stay in a public queue. Small sharp ideas. MIT throughout.
+            Norvia Labs ships focused open-source experiments for AI builders — an agent harness,
+            a control-plane gateway, and layers for contracts, routing, and audit. Small sharp
+            ideas. MIT throughout.
           </p>
           <div class="hero-ctas">
             <a class="btn btn-primary btn-lg" href="#experiments">Explore experiments</a>
@@ -109,16 +107,16 @@
       <section class="stats-bar">
         <div class="container stats-grid">
           <div class="stat">
-            <div class="stat-value" data-stat="experiments">6</div>
+            <div class="stat-value" data-stat="experiments">5</div>
             <div class="stat-label">Open experiments</div>
           </div>
           <div class="stat">
-            <div class="stat-value" data-stat="active">2</div>
+            <div class="stat-value" data-stat="active">1</div>
             <div class="stat-label">Active right now</div>
           </div>
           <div class="stat">
-            <div class="stat-value" data-stat="families">3</div>
-            <div class="stat-label">Product families</div>
+            <div class="stat-value">0</div>
+            <div class="stat-label">Accounts required</div>
           </div>
           <div class="stat">
             <div class="stat-value">MIT</div>
@@ -139,11 +137,10 @@
               private notebook.
             </p>
             <p>
-              Norvia Labs publishes that missing layer as focused, MIT-licensed experiments. Sometimes
-              it is a <strong>runtime primitive</strong> — a sandbox with hard limits. Sometimes it is
-              a <strong>dev-loop tool</strong> — MCP mocks, pinned fixtures, CI for prompts — or a
-              metrics surface so cost and quality stay visible. Each one does one thing well and lives
-              in the open. We build <strong>two actively</strong>; the rest stay in a public queue.
+              Norvia Labs publishes that missing layer as focused, MIT-licensed experiments. The spine
+              is <strong>forge</strong> (agent harness) and <strong>guard</strong> (MCP governance, ZTNA
+              identity, execution safety), with <strong>contract</strong>, <strong>route</strong>, and
+              <strong>audit</strong> layered on top. Each one does one thing well and lives in the open.
             </p>
             <div class="about-links">
               <a class="btn btn-ghost" href="/about/">Read our thesis</a>
@@ -157,13 +154,11 @@
             </div>
             <pre><span class="cm"># Small imports. Sharp ideas. Ship in the open.</span>
 <span class="kw">from</span> forge <span class="kw">import</span> Harness
-<span class="kw">from</span> sandbox_lite <span class="kw">import</span> Sandbox
 
 harness = Harness(policy=<span class="str">"tools-only"</span>)
-<span class="kw">with</span> Sandbox(timeout=30, mem_mb=256) <span class="kw">as</span> box:
-    result = harness.step(box.run, agent_turn)
+result = harness.step(agent_turn)
 
-<span class="cm"># queue next: wiremock-mcp, fixturelab, metrics…</span></pre>
+<span class="cm"># stack: forge · guard · contract · route · audit</span></pre>
           </div>
         </div>
       </section>
@@ -175,32 +170,18 @@ harness = Harness(policy=<span class="str">"tools-only"</span>)
             <p class="section-label">The portfolio</p>
             <h2 class="section-title">Open experiments, one thesis</h2>
             <p class="section-desc">
-              Each experiment encodes one sharp idea, ships its own docs, and is free to fork.
-              Two are <strong>active</strong> at a time; the rest sit in the <strong>queue</strong>.
-              Filter by family.
+              Each experiment encodes one sharp idea. <strong>Active</strong> means shipping now;
+              <strong>Queue</strong> means planned next (listed, not yet interactive).
             </p>
           </div>
-          <div class="filter-row" data-filter-row></div>
-          <div class="product-grid" data-product-grid data-limit="6"></div>
-          <p class="empty-state" data-empty-state>No experiments in this family yet.</p>
+          <div class="product-grid" data-product-grid data-limit="5"></div>
+          <p class="empty-state" data-empty-state>No experiments listed yet.</p>
           <a class="see-all" href="/experiments/">See all experiments →</a>
         </div>
       </section>
 
-      <!-- Families -->
-      <section class="section section-muted" id="families">
-        <div class="container">
-          <div class="section-header">
-            <p class="section-label">What we build</p>
-            <h2 class="section-title">Three families across the experiment stack</h2>
-            <p class="section-desc">Every experiment fits into one of them.</p>
-          </div>
-          <div class="family-grid" data-family-grid></div>
-        </div>
-      </section>
-
       <!-- Decision table -->
-      <section class="section" id="find">
+      <section class="section section-muted" id="find">
         <div class="container">
           <div class="section-header">
             <p class="section-label">Find a tool</p>
@@ -215,7 +196,6 @@ harness = Harness(policy=<span class="str">"tools-only"</span>)
                 <tr>
                   <th>If you need to…</th>
                   <th>Reach for</th>
-                  <th>Family</th>
                   <th>Stack</th>
                 </tr>
               </thead>
@@ -226,7 +206,7 @@ harness = Harness(policy=<span class="str">"tools-only"</span>)
       </section>
 
       <!-- Principles -->
-      <section class="section section-muted" id="principles">
+      <section class="section" id="principles">
         <div class="container">
           <div class="section-header">
             <p class="section-label">How we build</p>
@@ -261,8 +241,8 @@ harness = Harness(policy=<span class="str">"tools-only"</span>)
               <div class="principle-num">4</div>
               <h3>MIT, no lock-in</h3>
               <p>
-                Every experiment is MIT licensed. No accounts, no telemetry tax, no closed tiers —
-                the library or CLI is the whole thing.
+                Experiments are MIT licensed when they ship. No accounts, no telemetry tax, no closed
+                tiers — the library or CLI is the whole thing.
               </p>
             </div>
           </div>
@@ -275,8 +255,8 @@ harness = Harness(policy=<span class="str">"tools-only"</span>)
           <div class="cta-block">
             <h2 class="section-title">Start with a single experiment</h2>
             <p class="section-desc">
-              All Norvia Labs projects are open source and MIT licensed. Every README, changelog,
-              and benchmark is in the open.
+              Norvia Labs projects are open source and MIT licensed as they ship. Follow
+              <strong>forge</strong> first; the gateway stack is next on the public roadmap.
             </p>
             <div class="cta-actions">
               <a class="btn btn-primary btn-lg" href="/experiments/">Browse experiments</a>
@@ -299,33 +279,36 @@ harness = Harness(policy=<span class="str">"tools-only"</span>)
               <summary>What is Norvia Labs?</summary>
               <div class="faq-body">
                 Norvia Labs is an open-source experiment lab building focused tools for AI builders.
-                We ship MIT-licensed projects across runtimes, observability, and tooling — each
-                encoding one sharp idea. Two experiments are active at a time; the rest wait in a
-                public queue.
+                We ship MIT-licensed projects around an agent harness and control-plane gateway stack
+                — each encoding one sharp idea.
               </div>
             </details>
             <details class="faq-item">
               <summary>Is everything open source?</summary>
               <div class="faq-body">
-                Yes. Experiments are MIT licensed and public on GitHub. There are no closed product
-                tiers today — the CLI or library is the whole thing.
+                Yes. Experiments are MIT licensed. There are no closed product tiers — when a project
+                ships, the library or CLI on GitHub is the whole thing.
               </div>
             </details>
             <details class="faq-item">
               <summary>How do I choose an experiment?</summary>
               <div class="faq-body">
-                Start from the problem. Use the “Find a tool” decision table on this page, or filter
-                the portfolio by family (Runtimes, Observability, Tooling). Prefer an
-                <strong>Active</strong> project if you want something moving now.
+                Start from the problem. Use the “Find a tool” decision table on this page, or browse
+                the portfolio. Cards marked <strong>Active</strong> are shipping now;
+                <strong>Queue</strong> experiments are listed but not yet interactive.
               </div>
             </details>
             <details class="faq-item">
               <summary>Can I contribute?</summary>
               <div class="faq-body">
-                Absolutely. Open an issue or PR on the relevant repository under
+                Absolutely. Use the
+                <a class="text-link" href="/contact/">contact form</a>
+                or open an issue on
                 <a class="text-link" href="https://github.com/norvialabs" target="_blank" rel="noopener"
                   >GitHub</a
-                >. Small, well-scoped changes and reproducible bug reports are especially welcome.
+                >
+                as repositories come online. Small, well-scoped changes and reproducible bug reports
+                are especially welcome.
               </div>
             </details>
             <details class="faq-item">
@@ -353,8 +336,8 @@ harness = Harness(policy=<span class="str">"tools-only"</span>)
           <div class="footer-col">
             <h4>Explore</h4>
             <a href="/experiments/">Experiments</a>
-            <a href="/#families">Families</a>
             <a href="/#find">Find a tool</a>
+            <a href="/#experiments">Portfolio</a>
           </div>
           <div class="footer-col">
             <h4>Lab</h4>

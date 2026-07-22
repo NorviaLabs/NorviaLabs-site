@@ -1,6 +1,6 @@
 # Norvia Labs
 
-Static website for **Norvia Labs** (`norvialabs.com`) — an open-source experiment lab site inspired by the visual language of [neullabs.com](https://www.neullabs.com/): dark navy base, blue/violet brand accents, Inter + JetBrains Mono, product cards, family filters, and a decision table.
+Static website for **Norvia Labs** (`norvialabs.com`) — an open-source experiment lab site inspired by the visual language of [neullabs.com](https://www.neullabs.com/): dark navy base, blue/violet brand accents, Inter + JetBrains Mono, product cards, and a decision table.
 
 ## Stack
 
@@ -65,9 +65,7 @@ Append an object to `window.NORVIA_EXPERIMENTS` in `data/experiments.js`:
   id: "my-tool",
   name: "my-tool",
   stack: "TypeScript", // or Python, Rust, Go, …
-  family: "Tooling",
-  familySlug: "tooling", // runtimes | observability | tooling
-  status: "queue", // "active" (max 2) | "queue"
+  status: "queue", // "active" | "queue"
   description: "One sentence that states the sharp idea.",
   // Only add when the repo is live — omitted links render as "Coming soon" / disabled queue cards
   // url: "https://github.com/norvialabs/my-tool",
@@ -75,8 +73,8 @@ Append an object to `window.NORVIA_EXPERIMENTS` in `data/experiments.js`:
 }
 ```
 
-Keep at most **two** experiments with `status: "active"`. Queue cards are non-interactive.
-Update decision-table rows in `app.js` if you want it listed under “If you need this…”.
+Queue cards are non-interactive until `url` / `code` are set. Update decision-table rows in
+`app.js` if you want it listed under “If you need this…”.
 
 ## Deploy
 

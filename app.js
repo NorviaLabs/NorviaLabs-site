@@ -1,6 +1,5 @@
 (function () {
   const experiments = window.NORVIA_EXPERIMENTS || [];
-  const families = window.NORVIA_FAMILIES || [];
 
   /* Theme */
   const root = document.documentElement;
@@ -83,7 +82,7 @@
     const status = exp.status === "active" ? "active" : "queue";
     const disabled = status === "queue";
     return `
-      <article class="product-card${disabled ? " is-disabled" : ""}" data-group="${exp.familySlug}" data-status="${status}"${disabled ? ' aria-disabled="true"' : ""}>
+      <article class="product-card${disabled ? " is-disabled" : ""}" data-status="${status}"${disabled ? ' aria-disabled="true"' : ""}>
         <div class="product-card-top">
           <div class="product-name-row">
             <span class="product-icon">${arrowSvg}</span>
@@ -96,7 +95,6 @@
         </div>
         <p class="product-desc">${exp.description}</p>
         <div class="product-footer">
-          <span class="product-family">${exp.family}</span>
           ${linksHTML(exp)}
         </div>
       </article>`;
@@ -114,67 +112,15 @@
 
   /* Home / experiments grid */
   const grid = document.querySelector("[data-product-grid]");
-  const filterRow = document.querySelector("[data-filter-row]");
   const empty = document.querySelector("[data-empty-state]");
-  let activeFilter = "all";
 
-  function countsByFamily() {
-    const map = { all: experiments.length };
-    families.forEach((f) => {
-      map[f.slug] = experiments.filter((e) => e.familySlug === f.slug).length;
-    });
-    return map;
-  }
-
-  function renderFilters() {
-    if (!filterRow) return;
-    const counts = countsByFamily();
-    const items = [
-      { slug: "all", name: "All", count: counts.all },
-      ...families.map((f) => ({
-        slug: f.slug,
-        name: f.name,
-        count: counts[f.slug] || 0,
-      })),
-    ];
-    filterRow.innerHTML = items
-      .map(
-        (f) => `
-      <button type="button" class="filter-btn${f.slug === activeFilter ? " active" : ""}" data-filter="${f.slug}">
-        ${f.name}<span class="count">${f.count}</span>
-      </button>`
-      )
-      .join("");
-
-    filterRow.querySelectorAll("[data-filter]").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        activeFilter = btn.getAttribute("data-filter");
-        renderFilters();
-        renderCards();
-      });
-    });
-  }
-
-  function filtered() {
-    const base =
-      activeFilter === "all"
-        ? experiments
-        : experiments.filter((e) => e.familySlug === activeFilter);
-    return sortedExperiments(base);
-  }
-
-  function renderCards(limit) {
+  function renderCards() {
     if (!grid) return;
-    let list = filtered();
-    if (typeof limit === "number") list = list.slice(0, limit);
+    let list = sortedExperiments(experiments);
     const homeLimit = grid.hasAttribute("data-limit")
       ? parseInt(grid.getAttribute("data-limit"), 10)
       : null;
-    if (homeLimit && activeFilter === "all") {
-      list = filtered().slice(0, homeLimit);
-    } else if (homeLimit && activeFilter !== "all") {
-      list = filtered();
-    }
+    if (homeLimit) list = list.slice(0, homeLimit);
 
     grid.innerHTML = list.map(cardHTML).join("");
     if (empty) {
@@ -183,34 +129,7 @@
   }
 
   if (grid) {
-    renderFilters();
     renderCards();
-  }
-
-  /* Family section on home */
-  const familyGrid = document.querySelector("[data-family-grid]");
-  if (familyGrid) {
-    familyGrid.innerHTML = families
-      .map((f) => {
-        const members = experiments.filter((e) => e.familySlug === f.slug);
-        const tags = members
-          .slice(0, 6)
-          .map((e) => {
-            if (e.status === "queue" || !e.url) {
-              return `<span class="family-tag-plain${e.status === "queue" ? " is-queue" : ""}">${e.name}</span>`;
-            }
-            return `<a href="${e.url}" target="_blank" rel="noopener">${e.name}</a>`;
-          })
-          .join("");
-        return `
-          <div class="family-card">
-            <div class="family-meta">${members.length} experiment${members.length === 1 ? "" : "s"}</div>
-            <h3>${f.name}</h3>
-            <p>${f.description}</p>
-            <div class="family-tags">${tags}</div>
-          </div>`;
-      })
-      .join("");
   }
 
   /* Decision table */
@@ -218,11 +137,10 @@
   if (tableBody) {
     const rows = [
       ["run an agentic tool loop / harness", "forge"],
-      ["sandbox untrusted tool code", "sandbox-lite"],
-      ["mock MCP servers locally", "wiremock-mcp"],
-      ["pin fixtures for flaky LLM tests", "fixturelab"],
-      ["export AI metrics and map token spend", "openmetrics-ai"],
-      ["version and review prompts in CI", "promptforge"],
+      ["proxy agents with MCP governance and execution safety", "guard"],
+      ["expose enterprise APIs as clean agent tool schemas", "contract"],
+      ["prune unused tools from the prompt to save tokens", "route"],
+      ["cryptographically audit every gateway action", "audit"],
     ];
 
     tableBody.innerHTML = rows
@@ -242,7 +160,6 @@
           <tr${queued ? ' class="decision-row-queue"' : ""}>
             <td>${need}</td>
             <td>${reach}</td>
-            <td>${exp.family}</td>
             <td>${exp.stack}</td>
           </tr>`;
       })
@@ -253,7 +170,6 @@
   document.querySelectorAll("[data-stat]").forEach((el) => {
     const key = el.getAttribute("data-stat");
     if (key === "experiments") el.textContent = String(experiments.length);
-    if (key === "families") el.textContent = String(families.length);
     if (key === "active") {
       el.textContent = String(experiments.filter((e) => e.status === "active").length);
     }
