@@ -28,10 +28,33 @@ npx serve .
 | What | Where |
 | --- | --- |
 | Experiments list | `data/experiments.js` |
-| Copy & sections | `index.html`, `about.html`, `experiments.html` |
+| Contact form backend | `data/contact-config.js` (Web3Forms access key) |
+| Copy & sections | `index.html`, `about/`, `experiments/`, `contact/` |
 | Colors / layout | `styles.css` |
 | GitHub org links | search for `github.com/norvialabs` |
-| Contact email | `hello@norvialabs.com` in footer / about |
+
+### Clean URLs
+
+Pages live as folders so paths have no `.html` suffix:
+
+| URL | File |
+| --- | --- |
+| `/` | `index.html` |
+| `/about/` | `about/index.html` |
+| `/experiments/` | `experiments/index.html` |
+| `/contact/` | `contact/index.html` |
+
+Stub files `about.html`, `contact.html`, and `experiments.html` redirect to the clean paths for old bookmarks.
+
+### Contact form (Web3Forms)
+
+The contact page posts to [Web3Forms](https://web3forms.com/) (free: **250 submissions/month**).
+
+1. Create a key at https://web3forms.com/ for your inbox
+2. Confirm the email
+3. Put the access key in `data/contact-config.js` → `accessKey`
+
+The public site does not display a direct email address; visitors use `/contact/` or GitHub.
 
 ### Add an experiment
 

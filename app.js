@@ -196,4 +196,130 @@
     if (key === "experiments") el.textContent = String(experiments.length);
     if (key === "families") el.textContent = String(families.length);
   });
+
+  /* Contact form → Web3Forms */
+  const contactForm = document.getElementById("contact-form");
+  if (contactForm) {
+    const success = contactForm.querySelector("[data-form-success]");
+    const error = contactForm.querySelector("[data-form-error]");
+    const submitBtn = contactForm.querySelector('[type="submit"]');
+    const cfg = window.NORVIA_CONTACT || {};
+    const accessKey = (cfg.accessKey || "").trim();
+    const subjectPrefix = cfg.subjectPrefix || "NorviaLabs contact";
+    const githubUrl = "https://github.com/norvialabs";
+
+    function show(el, text) {
+      if (!el) return;
+      if (text) el.innerHTML = text;
+      el.classList.add("show");
+    }
+
+    function hideStatus() {
+      if (success) success.classList.remove("show");
+      if (error) error.classList.remove("show");
+    }
+
+    function setLoading(loading) {
+      if (!submitBtn) return;
+      submitBtn.disabled = loading;
+      submitBtn.setAttribute("aria-busy", loading ? "true" : "false");
+      if (!submitBtn.dataset.label) {
+        submitBtn.dataset.label = submitBtn.textContent;
+      }
+      submitBtn.textContent = loading ? "Sending…" : submitBtn.dataset.label;
+    }
+
+    contactForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      hideStatus();
+
+      const name = (contactForm.elements.namedItem("name") || {}).value || "";
+      const email = (contactForm.elements.namedItem("email") || {}).value || "";
+      const company = (contactForm.elements.namedItem("company") || {}).value || "";
+      const message = (contactForm.elements.namedItem("message") || {}).value || "";
+      const botcheck = (contactForm.elements.namedItem("botcheck") || {}).value || "";
+
+      const nameTrim = String(name).trim();
+      const emailTrim = String(email).trim();
+      const companyTrim = String(company).trim();
+      const messageTrim = String(message).trim();
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailTrim);
+
+      if (!nameTrim || !emailOk || !messageTrim) {
+        show(
+          error,
+          "Please fill in name, a valid email, and a message — then try again."
+        );
+        return;
+      }
+
+      // Honeypot filled → pretend success (bots)
+      if (String(botcheck).trim()) {
+        show(
+          success,
+          "Thank you! Your message has been sent. We will get back to you soon."
+        );
+        contactForm.reset();
+        return;
+      }
+
+      if (!accessKey || accessKey === "YOUR_ACCESS_KEY_HERE") {
+        show(
+          error,
+          `Contact form is not configured yet. Please open an issue on
+          <a class="text-link" href="${githubUrl}" target="_blank" rel="noopener">GitHub</a>.`
+        );
+        return;
+      }
+
+      setLoading(true);
+      try {
+        const res = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            access_key: accessKey,
+            subject: `${subjectPrefix}: ${nameTrim}`,
+            from_name: cfg.fromName || "NorviaLabs website",
+            name: nameTrim,
+            email: emailTrim,
+            company: companyTrim || undefined,
+            message: messageTrim,
+            replyto: emailTrim,
+          }),
+        });
+
+        const data = await res.json().catch(() => ({}));
+
+        if (res.ok && data.success) {
+          show(
+            success,
+            "Thank you! Your message has been sent. We will get back to you soon."
+          );
+          contactForm.reset();
+        } else {
+          const msg =
+            data.message ||
+            "Sorry, something went wrong. Please try again in a moment.";
+          show(
+            error,
+            `${msg}
+            You can also open an issue on
+            <a class="text-link" href="${githubUrl}" target="_blank" rel="noopener">GitHub</a>.`
+          );
+        }
+      } catch (_) {
+        show(
+          error,
+          `Network error — please try again, or open an issue on
+          <a class="text-link" href="${githubUrl}" target="_blank" rel="noopener">GitHub</a>.`
+        );
+      } finally {
+        setLoading(false);
+      }
+    });
+  }
 })();
