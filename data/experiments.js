@@ -10,7 +10,7 @@ window.NORVIA_EXPERIMENTS = [
     status: "active",
     description:
       "Agentic harness for running tools, loops, and policies. Thin core, pluggable models, deterministic replays.",
-    url: "https://github.com/norvialabs/forge",
+    url: "https://forge.norvialabs.com",
     code: "https://github.com/norvialabs/forge",
   },
   {
