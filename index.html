@@ -50,6 +50,148 @@
         } catch (e) {}
       })();
     </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://norvialabs.com/#organization",
+            "name": "Norvia Labs",
+            "url": "https://norvialabs.com/",
+            "logo": "https://norvialabs.com/assets/logo-mark-128.png",
+            "sameAs": ["https://github.com/norvialabs"]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://norvialabs.com/#website",
+            "name": "Norvia Labs",
+            "url": "https://norvialabs.com/",
+            "publisher": { "@id": "https://norvialabs.com/#organization" }
+          },
+          {
+            "@type": "ItemList",
+            "@id": "https://norvialabs.com/#experiments",
+            "name": "Norvia Labs experiments",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "item": {
+                  "@type": "SoftwareApplication",
+                  "name": "forge",
+                  "description": "Agentic harness for running tools, loops, and policies. Thin core, pluggable models, deterministic replays.",
+                  "url": "https://forge.norvialabs.com",
+                  "codeRepository": "https://github.com/norvialabs/forge",
+                  "applicationCategory": "DeveloperApplication",
+                  "operatingSystem": "Cross-platform",
+                  "license": "https://opensource.org/licenses/MIT",
+                  "programmingLanguage": "Rust"
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "item": {
+                  "@type": "SoftwareApplication",
+                  "name": "guard",
+                  "description": "Control-plane proxy for agent traffic: MCP governance, ephemeral agent identity (ZTNA), and real-time execution safety that stops loops and bad commands.",
+                  "applicationCategory": "DeveloperApplication",
+                  "operatingSystem": "Cross-platform",
+                  "license": "https://opensource.org/licenses/MIT",
+                  "programmingLanguage": "Rust"
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "item": {
+                  "@type": "SoftwareApplication",
+                  "name": "contract",
+                  "description": "API translation that turns existing enterprise backends into clean tool schemas agents can call without hand-written wrappers.",
+                  "applicationCategory": "DeveloperApplication",
+                  "operatingSystem": "Cross-platform",
+                  "license": "https://opensource.org/licenses/MIT",
+                  "programmingLanguage": "Rust"
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 4,
+                "item": {
+                  "@type": "SoftwareApplication",
+                  "name": "route",
+                  "description": "Context optimizer that prunes unused tool schemas from the prompt to cut token cost and latency.",
+                  "applicationCategory": "DeveloperApplication",
+                  "operatingSystem": "Cross-platform",
+                  "license": "https://opensource.org/licenses/MIT",
+                  "programmingLanguage": "Rust"
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 5,
+                "item": {
+                  "@type": "SoftwareApplication",
+                  "name": "audit",
+                  "description": "Structured, cryptographic audit ledger for every action the gateway processes — built for enterprise compliance.",
+                  "applicationCategory": "DeveloperApplication",
+                  "operatingSystem": "Cross-platform",
+                  "license": "https://opensource.org/licenses/MIT",
+                  "programmingLanguage": "Rust"
+                }
+              }
+            ]
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://norvialabs.com/#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What is Norvia Labs?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Norvia Labs is an open-source experiment lab building focused tools for AI builders. We ship MIT-licensed projects around an agent harness and control-plane gateway stack — each encoding one sharp idea."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is everything open source?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. Experiments are MIT licensed. There are no closed product tiers — when a project ships, the library or CLI on GitHub is the whole thing."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How do I choose an experiment?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Start from the problem. Use the \"Find a tool\" decision table on the homepage, or browse the portfolio. Cards marked Active are shipping now; Queue experiments are listed but not yet interactive."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I contribute?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. Use the contact form at norvialabs.com/contact/ or open an issue on GitHub at github.com/norvialabs as repositories come online. Small, well-scoped changes and reproducible bug reports are especially welcome."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How is this different from a product company site?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Norvia Labs is a lab, not a SaaS catalog. Experiments may graduate, pivot, or be archived in public. The goal is useful software and honest learning — not a sales funnel."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <header class="site-header">
