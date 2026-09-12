@@ -1,5 +1,6 @@
 (function () {
-  const experiments = window.NORVIA_EXPERIMENTS || [];
+  const dataLoaded = Array.isArray(window.NORVIA_EXPERIMENTS);
+  const experiments = dataLoaded ? window.NORVIA_EXPERIMENTS : [];
 
   /* Theme */
   const root = document.documentElement;
@@ -72,6 +73,11 @@
         `<a class="code" href="${exp.code}" target="_blank" rel="noopener">Code</a>`
       );
     }
+    if (exp.releases) {
+      parts.push(
+        `<a class="code" href="${exp.releases}" target="_blank" rel="noopener">Releases</a>`
+      );
+    }
     if (!parts.length) {
       return `<span class="product-links-muted">Coming soon</span>`;
     }
@@ -89,7 +95,7 @@
             ${nameHTML(exp)}
           </div>
           <div class="product-badges">
-            <span class="status-badge status-${status}">${statusLabel(status)}</span>
+            <span class="status-badge status-${status}">${exp.primary ? "Active project" : statusLabel(status)}</span>
             <span class="stack-badge" data-stack="${exp.stack}">${exp.stack}</span>
           </div>
         </div>
@@ -124,7 +130,13 @@
 
     grid.innerHTML = list.map(cardHTML).join("");
     if (empty) {
-      empty.classList.toggle("show", list.length === 0);
+      const isEmpty = list.length === 0;
+      empty.classList.toggle("show", isEmpty);
+      if (isEmpty) {
+        empty.innerHTML = dataLoaded
+          ? "No experiments listed yet."
+          : 'Experiment inventory could not load. Browse the repositories on <a class="text-link" href="https://github.com/norvialabs" target="_blank" rel="noopener">GitHub</a>.';
+      }
     }
   }
 
@@ -136,11 +148,11 @@
   const tableBody = document.querySelector("[data-decision-body]");
   if (tableBody) {
     const rows = [
-      ["run an agentic tool loop / harness", "forge"],
-      ["proxy agents with MCP governance and execution safety", "guard"],
-      ["expose enterprise APIs as clean agent tool schemas", "contract"],
-      ["prune unused tools from the prompt to save tokens", "route"],
-      ["cryptographically audit every gateway action", "audit"],
+      ["work with coding agents in one terminal workspace", "Forge"],
+      ["govern agent-accessible tools and infrastructure", "Guard"],
+      ["define explicit contracts for systems and APIs agents use", "Contract"],
+      ["route agent and model workloads", "Route"],
+      ["keep auditable records of agent actions and decisions", "Audit"],
     ];
 
     tableBody.innerHTML = rows
@@ -174,6 +186,20 @@
       el.textContent = String(experiments.filter((e) => e.status === "active").length);
     }
   });
+
+  /* Lab status panel (homepage) — same data as the grid, no separate copy */
+  const labStatus = document.querySelector("[data-lab-status]");
+  if (labStatus) {
+    const lines = sortedExperiments(experiments).map((exp) => {
+      const status = exp.status === "active" ? "active" : "queue";
+      const statusClass = exp.status === "active" ? "str" : "cm";
+      return `<span class="kw">${exp.name.padEnd(9)}</span><span class="${statusClass}">${status.padEnd(7)}</span><span class="cm">${exp.tagline || exp.description}</span>`;
+    });
+    labStatus.innerHTML =
+      `<span class="cm"># open experiment inventory</span>\n\n` +
+      lines.join("\n") +
+      `\n\n<span class="cm"># ${experiments.length} experiments · ${experiments.filter((e) => e.status === "active").length} active · MIT licensed</span>`;
+  }
 
   /* Contact form → Web3Forms */
   const contactForm = document.getElementById("contact-form");

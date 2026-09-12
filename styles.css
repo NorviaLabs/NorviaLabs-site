@@ -697,6 +697,11 @@ html.light .code-panel {
   tab-size: 2;
 }
 
+.lab-panel pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
 .code-panel .cm {
   color: #64748b;
 }

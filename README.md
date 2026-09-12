@@ -63,13 +63,15 @@ Append an object to `window.NORVIA_EXPERIMENTS` in `data/experiments.js`:
 ```js
 {
   id: "my-tool",
-  name: "my-tool",
+  name: "My Tool",
   stack: "Rust",
   status: "queue", // "active" | "queue"
+  tagline: "Short one-liner for the homepage lab status panel.",
   description: "One sentence that states the sharp idea.",
   // Only add when the repo is live — omitted links render as "Coming soon" / disabled queue cards
   // url: "https://github.com/norvialabs/my-tool",
   // code: "https://github.com/norvialabs/my-tool",
+  // releases: "https://github.com/norvialabs/my-tool/releases",
 }
 ```
 

@@ -1,48 +1,54 @@
 /** Norvia Labs experiments portfolio — edit this file to add/remove projects.
- *  status: "active" = shipping now; "queue" = planned (listed, not interactive).
- *  url / code: only set when the repo is public and live. Omit until then.
+ *  status: "active" = shipping now; "queue" = listed idea, not yet built.
+ *  tagline: short one-liner used in the lab status panel.
+ *  primary: true marks the lab's active project.
+ *  url / code / releases: only set when the repo is public and live. Omit until then.
  */
 window.NORVIA_EXPERIMENTS = [
   {
     id: "forge",
-    name: "forge",
+    name: "Forge",
     stack: "Rust",
     status: "active",
+    primary: true,
+    tagline: "Terminal-native AI coding environment.",
     description:
-      "Agentic harness for running tools, loops, and policies. Thin core, pluggable models, deterministic replays.",
+      "An open-source terminal-native AI coding environment that brings the agent, editor, repository navigation, shell, diffs, approvals, and durable sessions into one workspace.",
     url: "https://forge.norvialabs.com",
     code: "https://github.com/norvialabs/forge",
+    releases: "https://github.com/norvialabs/forge/releases",
   },
   {
     id: "guard",
-    name: "guard",
+    name: "Guard",
     stack: "Rust",
     status: "queue",
+    tagline: "Governance and execution controls for agent-accessible tools and infrastructure.",
     description:
-      "Control-plane proxy for agent traffic: MCP governance, ephemeral agent identity (ZTNA), and real-time execution safety that stops loops and bad commands.",
+      "Governance and execution controls for agent-accessible tools and infrastructure.",
   },
   {
     id: "contract",
-    name: "contract",
+    name: "Contract",
     stack: "Rust",
     status: "queue",
-    description:
-      "API translation that turns existing enterprise backends into clean tool schemas agents can call without hand-written wrappers.",
+    tagline: "Explicit contracts for systems and APIs used by agents.",
+    description: "Explicit contracts for systems and APIs used by agents.",
   },
   {
     id: "route",
-    name: "route",
+    name: "Route",
     stack: "Rust",
     status: "queue",
-    description:
-      "Context optimizer that prunes unused tool schemas from the prompt to cut token cost and latency.",
+    tagline: "Routing infrastructure for agent and model workloads.",
+    description: "Routing infrastructure for agent and model workloads.",
   },
   {
     id: "audit",
-    name: "audit",
+    name: "Audit",
     stack: "Rust",
     status: "queue",
-    description:
-      "Structured, cryptographic audit ledger for every action the gateway processes — built for enterprise compliance.",
+    tagline: "Auditable records of agent actions and decisions.",
+    description: "Auditable records of agent actions and decisions.",
   },
 ];
