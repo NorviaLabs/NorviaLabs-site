@@ -1,0 +1,4 @@
+# GitHub Pages: serve the static site as-is; keep repo docs off the public site.
+exclude:
+  - README.md
+  - DESIGN.md

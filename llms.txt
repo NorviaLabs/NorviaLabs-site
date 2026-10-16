@@ -1,24 +1,24 @@
 # Norvia Labs
 
-> Norvia Labs is an open-source lab exploring developer tools and infrastructure for agentic software engineering. The active project is Forge, a terminal-native AI coding environment.
+> Norvia Labs builds tools for putting AI agents to work inside limits you set. Founded in June 2026 by Mohit Ranka. Products: Forge (available) and Conclave (coming soon), on top of a control layer for AI agents that is in development.
 
-Norvia Labs builds focused tools for how software gets built, operated, and governed when AI agents become part of the engineering stack. Experiments are MIT licensed and built in the open. The lab is not a services company.
+Every product keeps agents bounded, keeps people in charge of anything that changes the world, and shows its evidence.
 
-## Docs
+## Products
 
-- [About](https://norvialabs.com/about/): The lab's thesis, principles, and how experiments are built and shipped
-- [Experiments](https://norvialabs.com/experiments/): Full portfolio of open-source experiments and queued ideas
-- [Contact](https://norvialabs.com/contact/): Open-source collaboration, project discussion, and contributions
+- [Forge](https://norvialabs.com/products/forge/): Open-source terminal coding environment where AI agents run inside an OS sandbox (Seatbelt on macOS, bubblewrap on Linux). Rust, MIT, pre-release v0.1.0-beta.11 (28 Sep 2026). [source](https://github.com/norvialabs/forge) · [releases](https://github.com/norvialabs/forge/releases)
+- [Conclave](https://norvialabs.com/conclave/): Teams of AI agents and people with limits built in: bounded runs, budgeted delegation, approvers for anything that changes the world, and Studio, a no-code builder. Coming soon; not yet publicly released.
 
-## Projects
+## Pages
 
-- [Forge](https://forge.norvialabs.com/): Terminal-native AI coding environment. Brings the agent, editor, repository navigation, shell, diffs, approvals, and durable sessions into one workspace. Rust. Active — [source](https://github.com/norvialabs/forge) · [releases](https://github.com/norvialabs/forge/releases)
-- Guard: Governance and execution controls for agent-accessible tools and infrastructure. Queued experiment
-- Contract: Explicit contracts for systems and APIs used by agents. Queued experiment
-- Route: Routing infrastructure for agent and model workloads. Queued experiment
-- Audit: Auditable records of agent actions and decisions. Queued experiment
+- [Home](https://norvialabs.com/): AI agents that do real work, inside limits you set
+- [Forge](https://norvialabs.com/products/forge/): Product page, features and install
+- [Platform](https://norvialabs.com/platform/): the control layer: one gateway with Guard, Approvals, Audit and Identity behind it (Guard and Audit in development inside Forge; the rest planned)
+- [Roadmap](https://norvialabs.com/roadmap/): the three stages (developers, teams, companies), now/next/later, business model, and what Norvia Labs won't build
+- [Building Forge](https://norvialabs.com/building-forge/): How Forge was built and the decisions behind it
+- [Company](https://norvialabs.com/about/): Why now, how we work, and the founder
+- [Contact](https://norvialabs.com/contact/): Get in touch or ask for early access
 
-## Optional
+## People
 
-- [GitHub org](https://github.com/norvialabs): Source code, releases, and issues
-- [Mohit Ranka](https://mohitranka.com/): Embedded engineering leadership engagements, separate from the lab
+- [Mohit Ranka](https://mohitranka.com/): Founder · [LinkedIn](https://www.linkedin.com/in/mohit-ranka)

@@ -2,3 +2,8 @@
 *.log
 .idea/
 .vscode/
+
+# Local design and product notes (kept out of the public repo)
+PRODUCT.md
+.impeccable/
+.claude/

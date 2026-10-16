@@ -1,11 +1,12 @@
 # Norvia Labs
 
-Static website for **Norvia Labs** (`norvialabs.com`) — an open-source experiment lab site inspired by the visual language of [neullabs.com](https://www.neullabs.com/): dark navy base, blue/violet brand accents, Inter + JetBrains Mono, product cards, and a decision table.
+Static website for **Norvia Labs** (`norvialabs.com`): open-source infrastructure for AI agents in production. Dark, monochrome silver on near-black with a live particle "gate"; colour appears only as an agent decision (allow green, ask amber, deny red). Product context lives in `PRODUCT.md`, the design system in `DESIGN.md`.
 
 ## Stack
 
 - Plain HTML, CSS, and JavaScript (no build step)
-- Portfolio data in `data/experiments.js`
+- Self-hosted fonts in `assets/fonts/` (Funnel Display, Funnel Sans, Martian Mono; SIL OFL)
+- `app.js`: hero terminal playback, mobile menu, copy button, table of contents, contact form
 
 ## Local preview
 
@@ -27,56 +28,31 @@ npx serve .
 
 | What | Where |
 | --- | --- |
-| Experiments list | `data/experiments.js` |
+| Pages | `index.html`, `platform/`, `roadmap/`, `products/forge/`, `conclave/`, `building-forge/`, `about/`, `contact/` |
 | Contact form backend | `data/contact-config.js` (Web3Forms access key) |
-| Copy & sections | `index.html`, `about/`, `experiments/`, `contact/` |
-| Colors / layout | `styles.css` |
-| GitHub org links | search for `github.com/norvialabs` |
+| Colours, type, layout | `styles.css` (tokens on `:root`) |
+| Crawlers | `llms.txt`, `sitemap.xml`, JSON-LD in each page head |
 
 ### Clean URLs
-
-Pages live as folders so paths have no `.html` suffix:
 
 | URL | File |
 | --- | --- |
 | `/` | `index.html` |
+| `/building-forge/` | `building-forge/index.html` |
+| `/platform/` | `platform/index.html` |
+| `/roadmap/` | `roadmap/index.html` |
 | `/about/` | `about/index.html` |
-| `/experiments/` | `experiments/index.html` |
 | `/contact/` | `contact/index.html` |
 
-Stub files `about.html`, `contact.html`, and `experiments.html` redirect to the clean paths for old bookmarks.
+`/ideas/`, `/experiments/`, `experiments.html`, `about.html` and `contact.html` are redirect stubs for old links.
 
 ### Contact form (Web3Forms)
 
-The contact page posts to [Web3Forms](https://web3forms.com/) (free: **250 submissions/month**).
+The contact page posts to [Web3Forms](https://web3forms.com/). Put the access key in `data/contact-config.js` → `accessKey`. The public site shows no email address; visitors use `/contact/`, LinkedIn, or mohitranka.com.
 
-1. Create a key at https://web3forms.com/ for your inbox
-2. Confirm the email
-3. Put the access key in `data/contact-config.js` → `accessKey`
+### Honesty rules
 
-The public site does not display a direct email address; visitors use `/contact/` or GitHub.
-
-### Add an experiment
-
-Append an object to `window.NORVIA_EXPERIMENTS` in `data/experiments.js`:
-
-```js
-{
-  id: "my-tool",
-  name: "My Tool",
-  stack: "Rust",
-  status: "queue", // "active" | "queue"
-  tagline: "Short one-liner for the homepage lab status panel.",
-  description: "One sentence that states the sharp idea.",
-  // Only add when the repo is live — omitted links render as "Coming soon" / disabled queue cards
-  // url: "https://github.com/norvialabs/my-tool",
-  // code: "https://github.com/norvialabs/my-tool",
-  // releases: "https://github.com/norvialabs/my-tool/releases",
-}
-```
-
-Queue cards are non-interactive until `url` / `code` are set. Update decision-table rows in
-`app.js` if you want it listed under “If you need this…”.
+Every claim must be checkable in the Forge repository. Never add stars, user counts, customers, funding, or team claims. Unbuilt platform parts stay marked "In development" or "Planned". See `PRODUCT.md`.
 
 ## Deploy
 
