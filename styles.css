@@ -2533,3 +2533,16 @@ main:has(> .closing:last-child) + .foot {
     margin-left: auto;
   }
 }
+
+/* ---------- Scroll parallax ---------- */
+
+[data-parallax] {
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-parallax] {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}

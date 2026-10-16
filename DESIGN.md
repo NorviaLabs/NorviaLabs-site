@@ -371,6 +371,8 @@ A canvas behind content (`canvas[data-field]`) in three modes, drawn with additi
 - **Dust (inner page heads):** a slow, sparse drift with brightness weighted to the right, so the left-hand headline stays clean.
 - **Reduced motion:** a single still frame (420 simulated steps) is drawn, with no animation loop.
 
+- **Scroll depth (parallax):** inside the canvas, far particles lag the page by 38% of the scroll, the gate and verdict events by 22%, near particles by 8%, so the stream reads as depth (the converge band measures from the viewport centre; on phones the hero's depth is damped to 30%). In the DOM, `data-parallax` drives three moves only: the hero copy drifts back at 22% and dims to no less than 25% as the hero leaves (desktop only), the homepage product captures shift 7% against their rows, and the footer wordmark rises into place over the last screen. Transform and opacity only, rAF-throttled, skipped offscreen; reduced motion turns all of it off.
+
 ### Architecture Diagram
 An inline SVG. Agent and system nodes are raised fills with 13% strokes and 10px radius, labelled in Funnel Sans 15px. Uppercase column labels are in faint Funnel Sans 12px with +0.08em tracking. The central gateway is one surface layer (16px radius, 34% silver stroke) split into hairline quadrants (16% stroke) for Guard, Approvals, Audit and Identity, with titles in Funnel Display 21px and muted subtitles in Funnel Sans 13px. Wires are 12% white curves. Animated flows are dotted silver dashes (2 16) that travel in 1.6s and stop under reduced motion. Below 760px a vertical version replaces the horizontal one.
 

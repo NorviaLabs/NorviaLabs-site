@@ -234,28 +234,42 @@
       }
     }
 
+    // Scroll depth: far dust lags most, the gate sits mid-depth, near particles keep pace with the page.
+    var DEPTH = { far: 0.38, mid: 0.22, near: 0.08 };
+    function scrollDepth() {
+      if (reduceMotion) return 0;
+      var r = canvas.getBoundingClientRect();
+      var damp = narrow && mode === "gate" ? 0.3 : 1;
+      if (mode === "converge") return -(r.top + r.height / 2 - window.innerHeight / 2) * damp;
+      return Math.max(0, -r.top) * damp;
+    }
+
     function draw() {
+      var t = scrollDepth();
       ctx.globalCompositeOperation = "source-over";
       ctx.clearRect(0, 0, w, h);
       ctx.globalCompositeOperation = "lighter";
-      if (gx > 0) drawGate();
+      if (gx > 0) { ctx.save(); ctx.translate(0, t * DEPTH.mid); drawGate(); ctx.restore(); }
       var buckets = [[], [], [], []];
       for (var i = 0; i < parts.length; i++) {
         var p = parts[i];
         if (p.verdict) continue;
-        var a = (p.a + p.flash * 0.6) * dim(p.x, p.y);
+        var a = (p.a + p.flash * 0.6) * dim(p.x, p.y + t * (p.near ? DEPTH.near : DEPTH.far));
         buckets[p.near && a > 0.3 ? 3 : a > 0.4 ? 2 : a > 0.18 ? 1 : 0].push(p);
       }
       var alphas = [0.12, 0.26, 0.48, 0.7], widths = [1, 1, 1, 1.5];
       for (var b = 0; b < 4; b++) {
+        ctx.save(); ctx.translate(0, t * (b === 3 ? DEPTH.near : DEPTH.far));
         ctx.strokeStyle = "rgba(226,226,222," + alphas[b] + ")";
         ctx.lineWidth = widths[b]; ctx.beginPath();
         for (var n = 0; n < buckets[b].length; n++) {
-          var t = buckets[b][n], len = mode === "dust" ? 1.6 : t.x < gx ? t.v * 3 + 0.8 : t.v * 10 + 2;
-          ctx.moveTo(t.x - len, t.y); ctx.lineTo(t.x, t.y);
+          var q = buckets[b][n], len = mode === "dust" ? 1.6 : q.x < gx ? q.v * 3 + 0.8 : q.v * 10 + 2;
+          ctx.moveTo(q.x - len, q.y); ctx.lineTo(q.x, q.y);
         }
         ctx.stroke();
+        ctx.restore();
       }
+      ctx.save(); ctx.translate(0, t * DEPTH.mid);
       ctx.font = labelFont; ctx.textBaseline = "middle";
       var labelled = null;
       for (var lm = 0; lm < parts.length; lm++) {
@@ -295,6 +309,7 @@
         ctx.fillStyle = "rgba(" + VERDICT.deny + "," + Math.min(1, (lead.life - 500) / 400) + ")";
         ctx.fillText("DENY", gx + 14, lead.y0 + 20);
       }
+      ctx.restore();
       ctx.globalCompositeOperation = "source-over";
     }
 
@@ -329,6 +344,42 @@
       rt = setTimeout(function () { size(); if (reduceMotion) still(); }, 150);
     });
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { if (copyEl) { size(); if (reduceMotion) still(); } });
+  }
+
+  /* ---------- Scroll parallax ---------- */
+
+  // data-parallax="0.07" shifts an element against its row as it crosses the viewport; "hero" lets the
+  // headline drift back and dim as the hero leaves; "rise" lifts the footer wordmark into place at the end.
+  var plx = Array.prototype.slice.call(document.querySelectorAll("[data-parallax]"));
+  if (plx.length && !reduceMotion) {
+    var pTick = false;
+    var pUpdate = function () {
+      pTick = false;
+      var vh = window.innerHeight;
+      plx.forEach(function (el) {
+        var mode = el.getAttribute("data-parallax");
+        var ref = el.parentElement.getBoundingClientRect();
+        if (ref.bottom < -200 || ref.top > vh + 200) return;
+        var y = 0, o = "";
+        if (mode === "hero") {
+          // On phones the copy sits directly above the gate stage and log, so it stays put.
+          if (window.innerWidth < 900) { el.style.transform = ""; el.style.opacity = ""; return; }
+          var s = Math.max(0, -ref.top);
+          y = s * 0.22;
+          o = String(Math.max(0.25, 1 - s / (ref.height * 1.1)));
+        } else if (mode === "rise") {
+          y = Math.max(0, ref.bottom - vh) * 0.45;
+        } else {
+          y = -(ref.top + ref.height / 2 - vh / 2) * parseFloat(mode);
+        }
+        el.style.transform = "translate3d(0," + y.toFixed(1) + "px,0)";
+        if (o) el.style.opacity = o;
+      });
+    };
+    var pQueue = function () { if (!pTick) { pTick = true; requestAnimationFrame(pUpdate); } };
+    window.addEventListener("scroll", pQueue, { passive: true });
+    window.addEventListener("resize", pQueue);
+    pUpdate();
   }
 
   document.querySelectorAll("canvas[data-field]").forEach(function (c) {
