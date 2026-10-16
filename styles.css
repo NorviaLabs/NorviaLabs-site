@@ -249,10 +249,11 @@ code {
   white-space: nowrap;
 }
 
-.brand img {
-  width: 26px;
-  height: 26px;
-  border-radius: 6px;
+.brand-mark {
+  width: 24px;
+  height: 24px;
+  flex: none;
+  color: var(--text);
 }
 
 .nav-links {

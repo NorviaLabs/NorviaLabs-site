@@ -263,7 +263,7 @@ Verdict chips are 10% tints of their hue with a 32%-alpha inset ring.
 
 **The Silver Status Rule.** Product and roadmap status is always silver. AVAILABLE · BETA (and SHIPPING) is an inverted silver chip. COMING SOON is a 7% tint, IN DEVELOPMENT (and BUILDING) is a 4% tint with a 24% ring, and PLANNED is an outline with muted text. The roadmap "Now" node is a filled silver dot with a 12% halo.
 
-**The Silver Mark Rule.** The logo appears only as the desaturated silver mark (`mark-mono-*`, `favicon-mono-32`, `apple-touch-mono`), at 26px in the nav and footer. The old coloured mark is never used on this site.
+**The Gate N Rule.** The logo is the Gate N: two silver posts (the gate) joined by a diagonal broken into three segments at 40%, 70% and 100% opacity, actions brightening as they pass through. The master is `assets/norvia-mark.svg` (32-unit grid, posts 4.6 wide at x 5 and 22.4, segments along the band from 9.6/13.8 at the top to 18.2/22.4 at the bottom, gaps at 27–36.5% and 63.5–73% of its length). It is inlined as `currentColor` SVG at 24px beside the Funnel Display 500 wordmark in the nav and footer; `favicon.svg` and the PNG icons (`favicon-mono-32`, `mark-mono-96`, `apple-touch-mono`, `norvia-mark-512`) set it on a #141416 tile. Silver only; never recoloured, outlined, rotated or given a gradient. The old blue-violet N is retired.
 
 ## Typography
 
@@ -388,7 +388,7 @@ A four-column footer (2fr + three 1fr columns) under a hairline. It has faint 13
 - **Do** make the primary action a white pill and the secondary a hairline ghost pill.
 - **Do** structure with hairlines, rails and the 1px bento gap, and seat panels with long soft black shadows only.
 - **Do** give every inner page head the dust field and every closing band the converge field, and render a still frame under reduced motion.
-- **Do** use only the silver mono mark for the logo.
+- **Do** use only the silver Gate N for the logo, from `assets/norvia-mark.svg`.
 
 ### Don't:
 - **Don't** use a verdict colour for success messages, links, hovers, brand accents, charts or status.
@@ -397,5 +397,5 @@ A four-column footer (2fr + three 1fr columns) under a hairline. It has faint 13
 - **Don't** nest cards. Gateway controls are hairline quadrants, and a tile holds content, not other tiles.
 - **Don't** set status tags, diagram labels, buttons or body copy in Martian Mono.
 - **Don't** set headings bold. Titles top out at weight 400.
-- **Don't** use the coloured or violet logo, or any mark other than the desaturated silver one.
+- **Don't** use the retired blue-violet N, or redraw the Gate N with a solid diagonal: the three segments are the mark.
 - **Don't** place the hero gate under the headline on mobile. It needs its own stage between the actions and the log.
