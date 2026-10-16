@@ -1,6 +1,6 @@
 # Norvia Labs
 
-> Norvia Labs builds tools for putting AI agents to work inside limits you set. Founded in June 2026 by Mohit Ranka. Products: Forge (available) and Conclave (coming soon), on top of a control layer for AI agents that is in development.
+> Norvia Labs builds tools for putting AI agents to work inside limits you set. Founded in October 2025 by Mohit Ranka. Products: Forge (available) and Conclave (coming soon), on top of a control layer for AI agents that is in development.
 
 Every product keeps agents bounded, keeps people in charge of anything that changes the world, and shows its evidence.
 
