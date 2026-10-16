@@ -102,8 +102,13 @@
         </a>
         <nav aria-label="Primary">
           <ul class="nav-links" id="nav-links">
-            <li><a href="/products/forge/">Forge</a></li>
-            <li><a href="/conclave/">Conclave</a></li>
+            <li class="nav-products">
+              <span class="nav-group-label" aria-hidden="true">Products</span>
+              <div class="nav-prod-group" role="group" aria-label="Products">
+                <a class="nav-prod" href="/products/forge/"><i class="st st-live" aria-hidden="true"></i>Forge<span class="st-label">Beta</span></a>
+                <a class="nav-prod" href="/conclave/"><i class="st st-soon" aria-hidden="true"></i>Conclave<span class="st-label">Soon</span></a>
+              </div>
+            </li>
             <li><a href="/platform/">Platform</a></li>
             <li><a href="/roadmap/">Roadmap</a></li>
             <li><a href="/about/">Company</a></li>
@@ -185,7 +190,7 @@
                 <div><dt>Licence</dt><dd>MIT</dd></div>
                 <div><dt>Commits</dt><dd>1,500+</dd></div>
               </dl>
-              <div class="links"><a class="arrow" href="/products/forge/">Explore Forge <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9.5M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+              <div class="links"><a class="prod-link" href="/products/forge/"><span>Explore Forge</span><span class="disc"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9.5M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></div>
             </div>
             <figure class="capture">
               <picture>
@@ -201,7 +206,7 @@
               <p class="tagline">Teams of agents and people, with limits built in.</p>
               <p>Describe a goal, adjust the suggested team and plan, and run it. Runs can't spin, delegation is budgeted, and anything that commits, pushes or sends waits for an approver.</p>
               <p class="proof">One definition runs from the command line, in Studio and over a REST API.</p>
-              <div class="links"><a class="arrow" href="/conclave/">Learn about Conclave <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9.5M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+              <div class="links"><a class="prod-link" href="/conclave/"><span>Learn about Conclave</span><span class="disc"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9.5M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></div>
             </div>
             <figure class="capture">
               <img src="/assets/conclave-studio-mobile.webp" width="900" height="450" alt="Conclave Studio showing the Software Delivery Team application, ready to run, with its first steps: implement the runtime issues, verify the implementation independently, and review code and verification." />

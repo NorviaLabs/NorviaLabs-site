@@ -335,6 +335,9 @@ White pills that feel lit rather than coloured.
 - **Text arrow:** a silver weight-500 link with a muted arrow, whose gap widens from 7px to 10px on hover.
 - **Disabled / busy:** 60% opacity with no lift.
 
+### Product Link
+The way into each product from the homepage rows, set apart from ordinary arrow links. A 52px pill with a Strong Hairline border and a 3% white fill: the label in body 500 on the left, a 38px solid silver disc with a dark arrow on the right. On hover the border lifts to 30% white, the left padding grows 4px and the disc slides 4px forward (350ms ease-out); reduced motion holds still. Silver only, never a verdict colour.
+
 ### Chips
 - **Status (silver):** 20px tall, 5px radius, Funnel Sans 600 at 11px with +0.06em tracking, uppercase. Variants are live (inverted silver), soon (7% tint with a 13% ring), dev (4% tint with a 24% ring) and plan (an outline only, with muted text).
 - **Verdict (colour):** the same box in Martian Mono 500, with a 10% hue tint, a 32% hue inset ring and hue text. They appear only in the decision log, policy samples and on the canvas.
@@ -358,6 +361,8 @@ The panel colour, a 13% hairline border, 12px radius and the log-seat shadow, se
 - A sticky bar in 82% ink black with a 16px blur, 64px tall, with a bottom hairline. It holds the silver mark and the "Norvia Labs" wordmark in Funnel Display 500, pill links in muted silver (full silver with a 5% wash on hover, full silver when current), a GitHub icon pill and a primary "Get in touch" pill.
 - **Mobile (<960px):** a 40px outlined menu button opens a full-width ink-black list with hairline-separated 1.0625rem links and a full-width silver pill CTA at the end.
 - **Announcement strip:** 38px on the surface colour, with a silver dot and its 3px halo, muted 13px text and a silver link whose arrow nudges 3px on hover.
+
+- **Product group:** Forge and Conclave sit together in one hairline pill (3px inset, 3% white fill) ahead of the plain links, set in bright text at 500. Each carries a status marker in silver only: a solid 7px dot with a soft ring and an uppercase "Beta" label for the shipped product, a hollow ring and "Soon" for the coming one. The current page fills its segment at 11% white. In the mobile menu the group becomes a "Products" section with the status labels right-aligned.
 
 ### Particle Field (signature)
 A canvas behind content (`canvas[data-field]`) in three modes, drawn with additive blending. Silver streaks are `rgba(226,226,222)` in four alpha buckets (0.12 to 0.7). The field dims to 7% under the copy it sits behind, and pauses off-screen and in hidden tabs.
