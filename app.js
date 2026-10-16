@@ -235,7 +235,7 @@
     }
 
     // Scroll depth: far dust lags most, the gate sits mid-depth, near particles keep pace with the page.
-    var DEPTH = { far: 0.38, mid: 0.22, near: 0.08 };
+    var DEPTH = { far: 0.62, mid: 0.36, near: 0.04 };
     function scrollDepth() {
       if (reduceMotion) return 0;
       var r = canvas.getBoundingClientRect();
@@ -365,8 +365,8 @@
           // On phones the copy sits directly above the gate stage and log, so it stays put.
           if (window.innerWidth < 900) { el.style.transform = ""; el.style.opacity = ""; return; }
           var s = Math.max(0, -ref.top);
-          y = s * 0.22;
-          o = String(Math.max(0.25, 1 - s / (ref.height * 1.1)));
+          y = s * 0.45;
+          o = String(Math.max(0, 1 - s / (ref.height * 0.75)));
         } else if (mode === "rise") {
           y = Math.max(0, ref.bottom - vh) * 0.45;
         } else {
