@@ -21,4 +21,4 @@ Every product keeps agents bounded, keeps people in charge of anything that chan
 
 ## People
 
-- [Mohit Ranka](https://mohitranka.com/): Founder · [LinkedIn](https://www.linkedin.com/in/mohit-ranka)
+- [Mohit Ranka](https://mohitranka.com/): Founder. 18 years building platforms: identity at Booking.com, Runtime at Postman, the sales data platform at LinkedIn, analytics and real-time integrations at Moveworks. Wrote Forge. · [LinkedIn](https://www.linkedin.com/in/mohit-ranka)
