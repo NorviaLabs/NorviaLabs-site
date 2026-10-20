@@ -103,7 +103,7 @@
         <div class="wrap">
           <h1>Building Forge.</h1>
           <p class="lede">
-            How we built a terminal coding environment where AI agents work inside an operating-system sandbox: the
+            How I built a terminal coding environment where AI agents work inside an operating-system sandbox: the
             decisions behind it, and what's still open.
           </p>
           <p class="meta">Engineering · By <a href="https://mohitranka.com/" target="_blank" rel="noopener">Mohit Ranka</a>, founder · Updated 16 Oct 2026</p>
@@ -169,7 +169,7 @@
           <h3>1. Safety comes from the operating system, not from parsing commands</h3>
           <p>
             The early design tried to decide which shell commands were safe by reading them. That approach fails open:
-            any command the parser misreads gets through. In August 2026 we rewrote the permission model around one
+            any command the parser misreads gets through. In August 2026 I rewrote the permission model around one
             falsifiable goal:
           </p>
           <blockquote>
@@ -181,7 +181,7 @@
             WSL2 on Windows. Network access goes through a domain-filtered egress proxy over a Unix socket, and denials
             explain themselves. The reference design was a sandbox plus an approval policy, deliberately with no model
             in the approval path, because a tool that runs on several providers can't depend on any one provider's
-            classifier. With enforcement in place, we deleted the roughly 1,650-line read-only command parser.
+            classifier. With enforcement in place, I deleted the roughly 1,650-line read-only command parser.
           </p>
 
           <h3>2. Declining a hardening step, and writing down why</h3>
@@ -191,7 +191,7 @@
             it properly would mean redesigning the relay around a passed-in file descriptor.
           </p>
           <p>
-            So we closed it as “will not do” on 18 Aug 2026 and recorded the reasoning. The risk it addressed is covered
+            So I closed it as “will not do” on 18 Aug 2026 and recorded the reasoning. The risk it addressed is covered
             where it can be checked: <code>/run</code> and <code>/tmp</code> are masked inside the sandbox, the abstract
             socket namespace follows the replaced network namespace, and a test asserts that a confined command can reach
             sockets in the workspace but not host sockets. On macOS the sandbox already denies those connects outright.
